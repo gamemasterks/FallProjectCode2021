@@ -1,4 +1,4 @@
-﻿using Microsoft.SPOT;
+using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System;
 using System.Threading;
@@ -40,6 +40,15 @@ namespace OmgWOW
             /* simple counter to print and watch using the debugger */
             int counter = 0;
 
+            // variable to make toggle system for operating intake
+            int runthat = 0;
+
+            // variable to make toggle system for operating belt
+            int runthis = 0;
+            
+            // variable to make toggle system for operating shooter
+            int runme = 0;
+
             /* loop forever */
             while (true)
             {
@@ -53,34 +62,69 @@ namespace OmgWOW
 
                 /* controlling the motor for intake */
 
-                // when X button is pressed, move intake forward by 50% 
-                if (gamepad.GetButton(1) == true)
+                // when X button is pressed, move intake forward by 100% 
+                if (gamepad.GetButton(1) == true && runthat == 0)
                 {
-                    motorI.Set(ControlMode.PercentOutput, 50);
+                    motorI.Set(ControlMode.PercentOutput, 100);
+
+                    runthat = 1;
                 }
 
-                // when Y button is pressed, move intake backward by 25%
+                // when X button is pressed again, move intake backward by 100%
+                if (gamepad.GetButton(1) == true && runthat == 1)
+                {
+                    motorI.Set(ControlMode.PercentOutput, -100);
+
+                    runthat = 0;
+                }
+
+                // when Y button is pressed, stop intake movement
                 if (gamepad.GetButton(4) == true)
-                {
-                    motorI.Set(ControlMode.PercentOutput, -25);
-                }
-
-                // when B button is pressed, stop intake movement
-                if (gamepad.GetButton(3) == true)
                 {
                     motorI.Set(ControlMode.PercentOutput, 0);
                 }
 
-                /* when A button is pressed, move belt for shooter and shooter forward by 100%, 
-                   wait 2.5 seconds, then stop both belt for shooter and shooter */
-                if (gamepad.GetButton(2) == true)
+                // when B button is pressed, stop belt movement
+                if (gamepad.GetButton(3) == true)
+                {
+                    motorB.Set(ControlMode.PercentOutput, 0);
+                }
+
+                // when A button is pressed, move belt forward by 100%
+                if (gamepad.GetButton(2) == true && runthis == 0)
                 {
                     motorB.Set(ControlMode.PercentOutput, 100);
+
+                    runthis = 1;
+                }
+
+                // when A button is pressed again, move belt backward by 100%
+                if (gamepad.GetButton(2) == true && runthis == 1)
+                {
+                    motorB.Set(ControlMode.PercentOutput, -100);
+
+                    runthis = 0;
+                }
+
+                // when LB is pressed, move shooter motor forward by 100%
+                if (gamepad.GetButton(5) == true && runme == 0)
+                {
                     motorS.Set(ControlMode.PercentOutput, 100);
 
-                    System.Threading.Thread.Sleep(2500);
+                    runme = 1;
+                }
 
-                    motorB.Set(ControlMode.PercentOutput, 0);
+                // when LB is pressed again, move shooter motor backward by 100%
+                if (gamepad.GetButton(5) == true && runme == 1)
+                {
+                    motorS.Set(ControlMode.PercentOutput, -100);
+
+                    runme = 0;
+                }
+
+                // when RB is pressed, stop shooter motor movement
+                if (gamepad.GetButton(6) == true)
+                {
                     motorS.Set(ControlMode.PercentOutput, 0);
                 }
 
