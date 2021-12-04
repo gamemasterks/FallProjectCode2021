@@ -45,8 +45,8 @@ namespace OmgWOW
 
             // variable to make toggle system for operating belt
             int runthis = 0;
-            
-            // variable to make toggle system for operating shooter
+
+            // variable to make toggle system for shooter
             int runme = 0;
 
             /* loop forever */
@@ -65,7 +65,7 @@ namespace OmgWOW
                 // when X button is pressed, move intake forward by 100% 
                 if (gamepad.GetButton(1) == true && runthat == 0)
                 {
-                    motorI.Set(ControlMode.PercentOutput, 100);
+                    motorI.Set(ControlMode.PercentOutput, 1);
 
                     runthat = 1;
                 }
@@ -73,7 +73,7 @@ namespace OmgWOW
                 // when X button is pressed again, move intake backward by 100%
                 if (gamepad.GetButton(1) == true && runthat == 1)
                 {
-                    motorI.Set(ControlMode.PercentOutput, -100);
+                    motorI.Set(ControlMode.PercentOutput, -1);
 
                     runthat = 0;
                 }
@@ -93,7 +93,7 @@ namespace OmgWOW
                 // when A button is pressed, move belt forward by 100%
                 if (gamepad.GetButton(2) == true && runthis == 0)
                 {
-                    motorB.Set(ControlMode.PercentOutput, 100);
+                    motorB.Set(ControlMode.PercentOutput, 1);
 
                     runthis = 1;
                 }
@@ -101,7 +101,7 @@ namespace OmgWOW
                 // when A button is pressed again, move belt backward by 100%
                 if (gamepad.GetButton(2) == true && runthis == 1)
                 {
-                    motorB.Set(ControlMode.PercentOutput, -100);
+                    motorB.Set(ControlMode.PercentOutput, -1);
 
                     runthis = 0;
                 }
@@ -109,7 +109,7 @@ namespace OmgWOW
                 // when LB is pressed, move shooter motor forward by 100%
                 if (gamepad.GetButton(5) == true && runme == 0)
                 {
-                    motorS.Set(ControlMode.PercentOutput, 100);
+                    motorS.Set(ControlMode.PercentOutput, 1);
 
                     runme = 1;
                 }
@@ -117,7 +117,7 @@ namespace OmgWOW
                 // when LB is pressed again, move shooter motor backward by 100%
                 if (gamepad.GetButton(5) == true && runme == 1)
                 {
-                    motorS.Set(ControlMode.PercentOutput, -100);
+                    motorS.Set(ControlMode.PercentOutput, -1);
 
                     runme = 0;
                 }
