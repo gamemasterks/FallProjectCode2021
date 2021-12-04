@@ -128,6 +128,35 @@ namespace OmgWOW
                     motorS.Set(ControlMode.PercentOutput, 0);
                 }
 
+                if (gamepad.GetButton(7) == true)
+                {
+                    long startTime = millis();
+
+                    while (millis() - startTime < 3000)
+                    {
+                        // move forward for 3 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 1000)
+                    {
+                        // turn for 1 second
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, 1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+                }
+
                 /* allow motor control */
                 CTRE.Phoenix.Watchdog.Feed();
 
@@ -140,6 +169,10 @@ namespace OmgWOW
                 /* wait a bit */
                 System.Threading.Thread.Sleep(100);
             }
+        }
+        public static long millis()
+        {
+            return DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond);
         }
     }
 }
