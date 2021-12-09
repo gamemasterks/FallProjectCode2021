@@ -60,8 +60,6 @@ namespace OmgWOW
                 motorL.Set(ControlMode.PercentOutput, gamepad.GetAxis(1) * -1);
                 motorR.Set(ControlMode.PercentOutput, gamepad.GetAxis(5));
 
-                /* controlling the motor for intake */
-
                 // when X button is pressed, move intake forward by 100% 
                 if (gamepad.GetButton(1) == true && runthat == 0)
                 {
@@ -128,10 +126,12 @@ namespace OmgWOW
                     motorS.Set(ControlMode.PercentOutput, 0);
                 }
 
+                // auton starts when button 7 is pressed
+                
                 if (gamepad.GetButton(7) == true)
                 {
                     long startTime = millis();
-
+                    
                     while (millis() - startTime < 3000)
                     {
                         // move forward for 3 seconds
