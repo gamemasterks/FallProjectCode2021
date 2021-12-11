@@ -29,25 +29,29 @@ namespace OmgWOW
             TalonSRX motorI = new TalonSRX(2);
             motorI.ConfigFactoryDefault();
 
-            // initialize shooter talon srx
-            TalonSRX motorS = new TalonSRX(3);
-            motorS.ConfigFactoryDefault();
+            // initialize left shooter talon srx
+            TalonSRX motorSL = new TalonSRX(3);
+            motorSL.ConfigFactoryDefault();
+            
+            // initialize right shooter talon srx
+            TalonSRX motorSR = new TalonSRX(4);
+            motorSR.ConfigFactoryDefault();
 
             // initialize belt talon srx
-            TalonSRX motorB = new TalonSRX(4);
+            TalonSRX motorB = new TalonSRX(5);
             motorB.ConfigFactoryDefault();
 
             /* simple counter to print and watch using the debugger */
             int counter = 0;
 
             // variable to make toggle system for operating intake
-            int runthat = 0;
-
-            // variable to make toggle system for operating belt
-            int runthis = 0;
-
-            // variable to make toggle system for shooter
-            int runme = 0;
+            int runin = 0;
+            
+            // variable for shooter toggle system
+            int runshoot = 0;
+            
+            // variable for belt toggle system
+            int runbelt = 0;
 
             /* loop forever */
             while (true)
@@ -62,74 +66,64 @@ namespace OmgWOW
 
                 /* controlling the motor for intake */
 
-                // when X button is pressed, move intake forward by 100% 
-                if (gamepad.GetButton(1) == true && runthat == 0)
+                // when A button is pressed move intake forward by 100% 
+                if (gamepad.GetButton(2) == true && runin == 0)
                 {
                     motorI.Set(ControlMode.PercentOutput, 1);
 
-                    runthat = 1;
+                    runin = 1;
                 }
 
-                // when X button is pressed again, move intake backward by 100%
-                if (gamepad.GetButton(1) == true && runthat == 1)
-                {
-                    motorI.Set(ControlMode.PercentOutput, -1);
-
-                    runthat = 0;
-                }
-
-                // when Y button is pressed, stop intake movement
-                if (gamepad.GetButton(4) == true)
+                // when A button is pressed again stop intake movement
+                if (gamepad.GetButton(2) == true && runin == 1)
                 {
                     motorI.Set(ControlMode.PercentOutput, 0);
+
+                    runin = 0;
                 }
 
-                // when B button is pressed, stop belt movement
-                if (gamepad.GetButton(3) == true)
-                {
-                    motorB.Set(ControlMode.PercentOutput, 0);
-                }
-
-                // when A button is pressed, move belt forward by 100%
-                if (gamepad.GetButton(2) == true && runthis == 0)
+                /* controlling belt motor */
+                
+                // when RB button is pressed once move belt motor forward by 100%
+                if (gamepad.GetButton(6) == true && runbelt == 0)
                 {
                     motorB.Set(ControlMode.PercentOutput, 1);
-
-                    runthis = 1;
+                    
+                    runbelt = 1;
                 }
 
-                // when A button is pressed again, move belt backward by 100%
-                if (gamepad.GetButton(2) == true && runthis == 1)
+                // when RB button is pressed again stop belt movement
+                if (gamepad.GetButton(6) == true && runbelt == 1)
                 {
-                    motorB.Set(ControlMode.PercentOutput, -1);
-
-                    runthis = 0;
+                    motorB.Set(ControlMode.PercentOutput, 0);
+                    
+                    runbelt = 0;
                 }
 
-                // when LB is pressed, move shooter motor forward by 100%
-                if (gamepad.GetButton(5) == true && runme == 0)
+                /* controlling shooter motors */
+                
+                // when LB is pressed once move shooter motors forward by 100%
+                if (gamepad.GetButton(5) == true && runshoot == 0)
                 {
-                    motorS.Set(ControlMode.PercentOutput, 1);
-
-                    runme = 1;
+                    motorSL.Set(ControlMode.PercentOutput, 1);
+                    motorSR.Set(ControlMode.PercentOutput, -1);
+                    
+                    runshoot = 1;
                 }
-
-                // when LB is pressed again, move shooter motor backward by 100%
-                if (gamepad.GetButton(5) == true && runme == 1)
+                
+                // when LB is pressed again stop shooter motors
+                if (gamepad.GetButton(5) == true && runshoot == 1)
                 {
-                    motorS.Set(ControlMode.PercentOutput, -1);
-
-                    runme = 0;
+                    motorSL.Set(ControlMode.PercentOutput, 0);
+                    motorSR.Set(ControlMode.PercentOutput, 0);
+                    
+                    runshoot = 0;
                 }
+                
+                /* auton */
 
-                // when RB is pressed, stop shooter motor movement
-                if (gamepad.GetButton(6) == true)
-                {
-                    motorS.Set(ControlMode.PercentOutput, 0);
-                }
-
-                // auton
-                if (gamepad.GetButton(7) == true)                {
+                // auton starts when Y is pressed
+                if (gamepad.GetButton(4) == true) {
                     long startTime = millis();
 
                     while (millis() - startTime < 4000)
