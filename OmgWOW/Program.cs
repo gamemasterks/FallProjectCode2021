@@ -60,6 +60,8 @@ namespace OmgWOW
                 motorL.Set(ControlMode.PercentOutput, gamepad.GetAxis(1) * -1);
                 motorR.Set(ControlMode.PercentOutput, gamepad.GetAxis(5));
 
+                /* controlling the motor for intake */
+
                 // when X button is pressed, move intake forward by 100% 
                 if (gamepad.GetButton(1) == true && runthat == 0)
                 {
@@ -126,15 +128,13 @@ namespace OmgWOW
                     motorS.Set(ControlMode.PercentOutput, 0);
                 }
 
-                // auton starts when button 7 is pressed
-                
-                if (gamepad.GetButton(7) == true)
-                {
+                // auton
+                if (gamepad.GetButton(7) == true)                {
                     long startTime = millis();
-                    
-                    while (millis() - startTime < 3000)
+
+                    while (millis() - startTime < 4000)
                     {
-                        // move forward for 3 seconds
+                        // move forward for 4 seconds
                         motorL.Set(ControlMode.PercentOutput, 1);
                         motorR.Set(ControlMode.PercentOutput, -1);
                     }
@@ -147,6 +147,126 @@ namespace OmgWOW
                     while (millis() - startTime < 1000)
                     {
                         // turn for 1 second
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, 1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while(millis() - startTime < 3000)
+                    {
+                        // forward for 3 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 1000)
+                    {
+                        // turn for 1 second
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, 1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 3000)
+                    {
+                        // forward for 3 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 2000)
+                    {
+                        // turn for 2 seconds
+                        motorL.Set(ControlMode.PercentOutput, -1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 2000)
+                    {
+                        // forward for 2 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 4000)
+                    {
+                        // forward for 4 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 3000)
+                    {
+                        // forward for 3 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 2000)
+                    {
+                        // turn for 2 seconds
+                        motorL.Set(ControlMode.PercentOutput, -1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 3000)
+                    {
+                        // forward for 3 seconds
+                        motorL.Set(ControlMode.PercentOutput, 1);
+                        motorR.Set(ControlMode.PercentOutput, -1);
+                    }
+
+                    motorL.Set(ControlMode.PercentOutput, 0);
+                    motorR.Set(ControlMode.PercentOutput, 0);
+
+                    startTime = millis();
+
+                    while (millis() - startTime < 2000)
+                    {
+                        // turn for 2 seconds
                         motorL.Set(ControlMode.PercentOutput, 1);
                         motorR.Set(ControlMode.PercentOutput, 1);
                     }
